@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { TaskService } from './../shared/task.service';
 import { Task } from './../shared/task';
 import { Component, OnInit } from '@angular/core';
@@ -9,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./task-form.page.scss'],
 })
 export class TaskFormPage implements OnInit {
-task: Task = new Task();
+  task: Task = new Task();
 
   title: string = "Nova Tarefa"
   constructor(
@@ -24,9 +25,11 @@ task: Task = new Task();
       this.task = this.taskService.getById(parseInt(id));
       this.title = 'Alterando Tarefa';
     }
-  }
-onSubimit(){
-  
+}
+
+onSubmit() {
+  this.taskService.save(this.task);
+  this.router.navigate([''])
 }
 
 
